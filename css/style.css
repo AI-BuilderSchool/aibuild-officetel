@@ -569,14 +569,27 @@ input{ font-family:inherit; }
   aspect-ratio: 4/3;
   border-radius:12px;
   display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:10px;
-  background: linear-gradient(135deg, var(--color-cream), #fff);
-  border:1px dashed var(--color-gold);
-  color: var(--color-primary);
+  align-items:center; justify-content:flex-end;
+  padding-bottom:14px;
+  background-color: var(--color-primary-dark);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  position:relative;
+  overflow:hidden;
+  transition: transform .25s ease;
 }
-.gallery-item i{ font-size:26px; color: var(--color-gold); }
-.gallery-item span{ font-size:12.5px; color: var(--color-gray); }
+.gallery-item::before{
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(20,10,35,.8) 0%, rgba(20,10,35,.1) 45%, rgba(20,10,35,0) 65%);
+}
+.gallery-item:hover{ transform: translateY(-4px); }
+.gallery-item span{
+  position:relative; z-index:1;
+  font-size:13px; font-weight:600; color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,.6);
+}
 
 /* ---------- Contact ---------- */
 .contact-grid{
