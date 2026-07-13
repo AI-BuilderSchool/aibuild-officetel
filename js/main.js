@@ -1,5 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- 히어로 배경: 마우스 움직임에 반응하는 패럴랙스 효과 ---------- */
+  const heroEl = document.querySelector('.hero');
+  const heroBg = document.querySelector('.hero__bg');
+
+  if (heroEl && heroBg) {
+    const maxShift = 24; // px
+    let heroTicking = false;
+    let pendingX = 0;
+    let pendingY = 0;
+
+    function applyHeroShift(){
+      heroBg.style.transform = `scale(1.08) translate(${pendingX}px, ${pendingY}px)`;
+      heroTicking = false;
+    }
+
+    heroEl.addEventListener('mousemove', (e) => {
+      const rect = heroEl.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      pendingX = -nx * maxShift * 2;
+      pendingY = -ny * maxShift * 2;
+      if (!heroTicking) {
+        window.requestAnimationFrame(applyHeroShift);
+        heroTicking = true;
+      }
+    });
+
+    heroEl.addEventListener('mouseleave', () => {
+      pendingX = 0;
+      pendingY = 0;
+      window.requestAnimationFrame(applyHeroShift);
+    });
+  }
+
   /* ---------- Mobile nav ---------- */
   const hamburger = document.getElementById('hamburger');
   const mnb = document.getElementById('mnb');
@@ -54,9 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- 상담신청 버튼 & 메뉴 활성 색상: 스크롤 위치의 섹션 배경에 따라 전환 ---------- */
+  /* ---------- 메뉴 & 상담신청 버튼 활성 색상: 스크롤 위치의 섹션에 따라 전환 ---------- */
   const header = document.getElementById('header');
-  const navLinks = document.querySelectorAll('.gnb a, .mnb a');
+  const navLinks = document.querySelectorAll('.gnb a, .mnb a, .logo');
+  const headerCta = document.querySelector('.header__cta');
 
   function isDarkSection(el){
     if (!el) return false;
@@ -75,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(a => {
       a.classList.toggle('is-active', a.getAttribute('href') === activeHref);
     });
+
+    // 상담신청 버튼: 오시는길·상담문의(#contact) 섹션일 때만 배경색을 갖도록 처리
+    if (headerCta) headerCta.classList.toggle('is-active', activeHref === '#contact');
   }
 
   let themeTicking = false;

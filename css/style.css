@@ -88,8 +88,22 @@ input{ font-family:inherit; }
   font-size:22px;
   color: var(--color-primary);
   white-space:nowrap;
+  padding:8px 16px;
+  border-radius:999px;
+  border:2px solid transparent;
+  transition: background .3s ease, border-color .3s ease;
 }
 .logo span{ color: var(--color-gold); }
+
+/* 사이트 최초 진입(히어로) 시 기본 활성 메뉴로 표시 */
+.logo.is-active{
+  background: rgba(73,25,125,.08);
+  border-color: var(--color-primary);
+}
+.header.is-on-dark .logo.is-active{
+  background: rgba(235,166,42,.12);
+  border-color: var(--color-gold);
+}
 
 .gnb{ flex:1; overflow-x:auto; scrollbar-width:none; }
 .gnb::-webkit-scrollbar{ display:none; }
@@ -121,8 +135,8 @@ input{ font-family:inherit; }
 
 .header__cta{
   flex-shrink:0;
-  background: var(--color-primary);
-  color:#fff;
+  background: transparent;
+  color: var(--color-primary);
   border:2px solid var(--color-primary);
   padding:9px 22px;
   border-radius:999px;
@@ -130,18 +144,20 @@ input{ font-family:inherit; }
   font-weight:700;
   transition: background .3s ease, border-color .3s ease, color .3s ease;
 }
-.header__cta:hover{ background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+.header__cta:hover{ background: rgba(73,25,125,.08); }
 
-/* 현재 스크롤 위치의 섹션이 어두운 배경일 때 상담신청 버튼 색상 전환 */
-.header.is-on-dark .header__cta{
+/* 오시는길·상담문의(#contact) 섹션일 때만 배경색을 채움 */
+.header__cta.is-active{
+  background: var(--color-primary);
+  color:#fff;
+}
+.header__cta.is-active:hover{ background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+.header.is-on-dark .header__cta.is-active{
   background: var(--color-gold);
   color: var(--color-primary-dark);
   border-color: var(--color-gold);
 }
-.header.is-on-dark .header__cta:hover{
-  background: var(--color-gold-light);
-  border-color: var(--color-gold-light);
-}
+.header.is-on-dark .header__cta.is-active:hover{ background: var(--color-gold-light); border-color: var(--color-gold-light); }
 
 .hamburger{
   display:none;
@@ -217,6 +233,9 @@ input{ font-family:inherit; }
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+  transform: scale(1.08) translate(0, 0);
+  transition: transform .5s cubic-bezier(.22,.68,0,1.01);
+  will-change: transform;
 }
 .hero__bg::after{
   content:'';
