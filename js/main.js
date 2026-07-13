@@ -54,6 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---------- 상담신청 버튼 색상: 스크롤 위치의 섹션 배경에 따라 전환 ---------- */
+  const header = document.getElementById('header');
+
+  function isDarkSection(el){
+    if (!el) return false;
+    return el.classList.contains('hero') || el.classList.contains('section--dark');
+  }
+
+  function updateHeaderTheme(){
+    const headerRect = header.getBoundingClientRect();
+    const probeX = window.innerWidth / 2;
+    const probeY = headerRect.bottom + 2;
+    const elAtProbe = document.elementFromPoint(probeX, probeY);
+    const section = elAtProbe ? elAtProbe.closest('section, .hero') : null;
+    header.classList.toggle('is-on-dark', isDarkSection(section));
+  }
+
+  let themeTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!themeTicking) {
+      window.requestAnimationFrame(() => { updateHeaderTheme(); themeTicking = false; });
+      themeTicking = true;
+    }
+  });
+  window.addEventListener('resize', updateHeaderTheme);
+  updateHeaderTheme();
+
   /* ---------- Back to top ---------- */
   const toTop = document.getElementById('toTop');
   window.addEventListener('scroll', () => {
