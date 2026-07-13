@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- 상담신청 버튼 색상: 스크롤 위치의 섹션 배경에 따라 전환 ---------- */
+  /* ---------- 상담신청 버튼 & 메뉴 활성 색상: 스크롤 위치의 섹션 배경에 따라 전환 ---------- */
   const header = document.getElementById('header');
+  const navLinks = document.querySelectorAll('.gnb a, .mnb a');
 
   function isDarkSection(el){
     if (!el) return false;
@@ -69,6 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const elAtProbe = document.elementFromPoint(probeX, probeY);
     const section = elAtProbe ? elAtProbe.closest('section, .hero') : null;
     header.classList.toggle('is-on-dark', isDarkSection(section));
+
+    const activeHref = section && section.id ? '#' + section.id : null;
+    navLinks.forEach(a => {
+      a.classList.toggle('is-active', a.getAttribute('href') === activeHref);
+    });
   }
 
   let themeTicking = false;
