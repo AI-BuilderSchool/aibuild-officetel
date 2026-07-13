@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- 히어로 배경: 마우스를 따라다니는 글로우(조명) 효과 ---------- */
+  /* ---------- 히어로 배경: 마우스를 따라다니는 손전등(스포트라이트) 효과 ---------- */
   const heroEl = document.querySelector('.hero');
 
   if (heroEl) {
@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     heroEl.addEventListener('mouseenter', () => {
-      heroEl.classList.add('is-glowing');
+      heroEl.classList.add('is-spotlight');
     });
 
     heroEl.addEventListener('mouseleave', () => {
-      heroEl.classList.remove('is-glowing');
+      heroEl.classList.remove('is-spotlight');
     });
   }
 
@@ -87,10 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- 메뉴 & 상담신청 버튼 활성 색상: 스크롤 위치의 섹션에 따라 전환 ---------- */
+  /* ---------- 메뉴 활성 색상: 스크롤 위치의 섹션에 따라 전환 ---------- */
   const header = document.getElementById('header');
   const navLinks = document.querySelectorAll('.gnb a, .mnb a, .logo');
-  const headerCta = document.querySelector('.header__cta');
 
   function isDarkSection(el){
     if (!el) return false;
@@ -109,9 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(a => {
       a.classList.toggle('is-active', a.getAttribute('href') === activeHref);
     });
-
-    // 상담신청 버튼: 오시는길·상담문의(#contact) 섹션일 때만 배경색을 갖도록 처리
-    if (headerCta) headerCta.classList.toggle('is-active', activeHref === '#contact');
   }
 
   let themeTicking = false;
