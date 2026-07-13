@@ -1,36 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- 히어로 배경: 마우스 움직임에 반응하는 패럴랙스 효과 ---------- */
+  /* ---------- 히어로 배경: 마우스를 따라다니는 글로우(조명) 효과 ---------- */
   const heroEl = document.querySelector('.hero');
-  const heroBg = document.querySelector('.hero__bg');
 
-  if (heroEl && heroBg) {
-    const maxShift = 24; // px
-    let heroTicking = false;
-    let pendingX = 0;
-    let pendingY = 0;
+  if (heroEl) {
+    let glowTicking = false;
+    let pendingMx = 50;
+    let pendingMy = 35;
 
-    function applyHeroShift(){
-      heroBg.style.transform = `scale(1.08) translate(${pendingX}px, ${pendingY}px)`;
-      heroTicking = false;
+    function applyHeroGlow(){
+      heroEl.style.setProperty('--mx', pendingMx + '%');
+      heroEl.style.setProperty('--my', pendingMy + '%');
+      glowTicking = false;
     }
 
     heroEl.addEventListener('mousemove', (e) => {
       const rect = heroEl.getBoundingClientRect();
-      const nx = (e.clientX - rect.left) / rect.width - 0.5;
-      const ny = (e.clientY - rect.top) / rect.height - 0.5;
-      pendingX = -nx * maxShift * 2;
-      pendingY = -ny * maxShift * 2;
-      if (!heroTicking) {
-        window.requestAnimationFrame(applyHeroShift);
-        heroTicking = true;
+      pendingMx = ((e.clientX - rect.left) / rect.width) * 100;
+      pendingMy = ((e.clientY - rect.top) / rect.height) * 100;
+      if (!glowTicking) {
+        window.requestAnimationFrame(applyHeroGlow);
+        glowTicking = true;
       }
     });
 
+    heroEl.addEventListener('mouseenter', () => {
+      heroEl.classList.add('is-glowing');
+    });
+
     heroEl.addEventListener('mouseleave', () => {
-      pendingX = 0;
-      pendingY = 0;
-      window.requestAnimationFrame(applyHeroShift);
+      heroEl.classList.remove('is-glowing');
     });
   }
 
