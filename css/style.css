@@ -190,8 +190,8 @@ input{ font-family:inherit; }
 }
 .btn--gold{ background: var(--color-gold); color: var(--color-primary-dark); }
 .btn--gold:hover{ background: var(--color-gold-light); transform: translateY(-2px); }
-.btn--outline{ border-color: rgba(255,255,255,.7); color:#fff; }
-.btn--outline:hover{ background: rgba(255,255,255,.12); }
+.btn--outline{ background: #2fa84f; border-color: #2fa84f; color:#fff; }
+.btn--outline:hover{ background: #268a41; border-color: #268a41; transform: translateY(-2px); }
 .btn--full{ width:100%; }
 
 /* ---------- Hero ---------- */
