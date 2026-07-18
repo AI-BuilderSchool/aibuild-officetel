@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 오시는길: 모델하우스 위치 구글 지도 ---------- */
   const contactMapEl = document.getElementById('contactMap');
   if (contactMapEl && window.GOOGLE_MAPS_API_KEY) {
-    const address = encodeURIComponent('서울 서초구 서초동 1498-1 AI빌드 갤러리');
+    const address = encodeURIComponent('서울특별시 서초구 서초동 1498-1');
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.google.com/maps/embed/v1/place?key=${window.GOOGLE_MAPS_API_KEY}&q=${address}`;
     iframe.loading = 'lazy';
