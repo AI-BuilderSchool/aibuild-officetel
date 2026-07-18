@@ -1,5 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- 오시는길: 모델하우스 위치 구글 지도 ---------- */
+  const contactMapEl = document.getElementById('contactMap');
+  if (contactMapEl && window.GOOGLE_MAPS_API_KEY) {
+    const address = encodeURIComponent('서울 서초구 서초동 1498-1 AI빌드 갤러리');
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.google.com/maps/embed/v1/place?key=${window.GOOGLE_MAPS_API_KEY}&q=${address}`;
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.title = '모델하우스 위치 지도';
+    contactMapEl.appendChild(iframe);
+  }
+
   /* ---------- 히어로 배경: 마우스를 따라다니는 손전등(스포트라이트) 효과 ---------- */
   const heroEl = document.querySelector('.hero');
 

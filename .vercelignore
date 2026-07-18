@@ -2,4 +2,3 @@
 .env*
 CLAUDE.md
 .claude/
-js/maps-config.js
