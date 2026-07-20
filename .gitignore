@@ -3,3 +3,4 @@
 CLAUDE.md
 .claude/
 js/maps-config.js
+js/supabase-config.js

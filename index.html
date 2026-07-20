@@ -380,6 +380,7 @@
             <label class="agree"><input type="checkbox" name="agree" required> 개인정보 수집 및 이용에 동의합니다</label>
             <button type="submit" class="btn btn--gold btn--full">상담 신청하기</button>
           </form>
+          <button type="button" class="lookup-trigger" data-open-modal="lookupModal">이미 상담을 신청하셨나요? <u>예약 조회·취소</u></button>
         </div>
       </div>
     </div>
@@ -434,7 +435,27 @@
   </div>
 </div>
 
+<!-- 예약 조회·취소 모달 -->
+<div class="modal" id="lookupModal">
+  <div class="modal__dim" data-close-modal></div>
+  <div class="modal__box modal__box--lookup">
+    <button class="modal__close" data-close-modal aria-label="닫기"><i class="fas fa-times"></i></button>
+    <p class="section__eyebrow">MY RESERVATION</p>
+    <h3>예약 조회 · 취소</h3>
+    <p class="modal__desc">신청하신 성함과 연락처를 입력하시면 예약 내역을 확인하고 취소하실 수 있습니다.</p>
+    <form class="contact-form" id="lookupForm">
+      <input type="text" name="name" placeholder="성함" required>
+      <input type="tel" name="phone" placeholder="연락처" required>
+      <button type="submit" class="btn btn--gold btn--full">조회하기</button>
+    </form>
+    <p class="lookup-msg" id="lookupMsg"></p>
+    <ul class="reservation-list" id="reservationList"></ul>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/maps-config.js"></script>
+<script src="js/supabase-config.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
